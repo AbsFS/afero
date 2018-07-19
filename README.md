@@ -1,4 +1,4 @@
-This is a fork of [spf13/afero](https://github.com/spf13/afero). Refere to that repo for offical Afero releases. This project is for onging afero mantainence and improvement, and does not garontee a stable API. 
+This is a fork of [spf13/afero](https://github.com/spf13/afero). Please refer to that repo for offical Afero releases. This project is for onging afero mantainence and improvement, and does not garontee a stable API. 
 
 ![afero logo-sm](https://cloud.githubusercontent.com/assets/173412/11490338/d50e16dc-97a5-11e5-8b12-019a300d0fcb.png)
 
