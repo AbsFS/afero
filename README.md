@@ -1,8 +1,10 @@
+This is a fork of [spf13/afero](https://github.com/spf13/afero). Refere to that repo for offical Afero releases. This project is for onging afero mantainence and improvement, and does not garontee a stable API. 
+
 ![afero logo-sm](https://cloud.githubusercontent.com/assets/173412/11490338/d50e16dc-97a5-11e5-8b12-019a300d0fcb.png)
 
 A FileSystem Abstraction System for Go
 
-[![Build Status](https://travis-ci.org/spf13/afero.svg)](https://travis-ci.org/spf13/afero) [![Build status](https://ci.appveyor.com/api/projects/status/github/spf13/afero?branch=master&svg=true)](https://ci.appveyor.com/project/spf13/afero) [![GoDoc](https://godoc.org/github.com/spf13/afero?status.svg)](https://godoc.org/github.com/spf13/afero) [![Join the chat at https://gitter.im/spf13/afero](https://badges.gitter.im/Dev%20Chat.svg)](https://gitter.im/spf13/afero?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Build Status](https://travis-ci.org/absfs/afero.svg)](https://travis-ci.org/absfs/afero) [![Build status](https://ci.appveyor.com/api/projects/status/github/absfs/afero?branch=master&svg=true)](https://ci.appveyor.com/project/absfs/afero) [![GoDoc](https://godoc.org/github.com/absfs/afero?status.svg)](https://godoc.org/github.com/absfs/afero) [![Join the chat at https://gitter.im/absfs/afero](https://badges.gitter.im/Dev%20Chat.svg)](https://gitter.im/absfs/afero?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 # Overview
 
@@ -50,11 +52,11 @@ A few different ways you could use Afero:
 
 First use go get to install the latest version of the library.
 
-    $ go get github.com/spf13/afero
+    $ go get github.com/absfs/afero
 
 Next include Afero in your application.
 ```go
-import "github.com/spf13/afero"
+import "github.com/absfs/afero"
 ```
 
 ## Step 2: Declare a backend
@@ -151,7 +153,7 @@ Walk(root string, walkFn filepath.WalkFunc) error
 WriteFile(filename string, data []byte, perm os.FileMode) error
 WriteReader(path string, r io.Reader) (err error)
 ```
-For a complete list see [Afero's GoDoc](https://godoc.org/github.com/spf13/afero)
+For a complete list see [Afero's GoDoc](https://godoc.org/github.com/absfs/afero)
 
 They are available under two different approaches to use. You can either call
 them directly where the first parameter of each function will be the file
@@ -449,4 +451,4 @@ Names in no particular order:
 ## License
 
 Afero is released under the Apache 2.0 license. See
-[LICENSE.txt](https://github.com/spf13/afero/blob/master/LICENSE.txt)
+[LICENSE.txt](https://github.com/absfs/afero/blob/master/LICENSE.txt)
