@@ -13,6 +13,10 @@
 
 package mem
 
+import (
+	"os"
+)
+
 type Dir interface {
 	Len() int
 	Names() []string
@@ -31,7 +35,7 @@ func AddToMemDir(dir *FileData, f *FileData) {
 
 func InitializeDir(d *FileData) {
 	if d.memDir == nil {
-		d.dir = true
+		d.mode = d.mode | os.ModeDir
 		d.memDir = &DirMap{}
 	}
 }
