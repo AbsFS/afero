@@ -54,7 +54,6 @@ type FileData struct {
 	name    string
 	data    []byte
 	memDir  Dir
-	dir     bool
 	mode    os.FileMode
 	modtime time.Time
 }
@@ -66,11 +65,11 @@ func (d *FileData) Name() string {
 }
 
 func CreateFile(name string) *FileData {
-	return &FileData{name: name, mode: os.ModeTemporary, modtime: time.Now()}
+	return &FileData{name: name, mode: 0644, modtime: time.Now()}
 }
 
 func CreateDir(name string) *FileData {
-	return &FileData{name: name, memDir: &DirMap{}, dir: true}
+	return &FileData{name: name, memDir: &DirMap{}, mode: os.ModeDir | 0755, modtime: time.Now()}
 }
 
 func ChangeFileName(f *FileData, newname string) {
@@ -131,9 +130,6 @@ func (f *File) Sync() error {
 }
 
 func (f *File) Readdir(count int) (res []os.FileInfo, err error) {
-	if !f.fileData.dir {
-		return nil, &os.PathError{Op: "readdir", Path: f.fileData.name, Err: errors.New("not a dir")}
-	}
 	var outLength int64
 
 	f.fileData.Lock()
@@ -193,8 +189,11 @@ func (f *File) Read(b []byte) (n int, err error) {
 }
 
 func (f *File) ReadAt(b []byte, off int64) (n int, err error) {
+	cur := atomic.LoadInt64(&f.at)
 	atomic.StoreInt64(&f.at, off)
-	return f.Read(b)
+	n, err = f.Read(b)
+	atomic.StoreInt64(&f.at, cur)
+	return n, err
 }
 
 func (f *File) Truncate(size int64) error {
@@ -237,16 +236,18 @@ func (f *File) Write(b []byte) (n int, err error) {
 		return 0, &os.PathError{Op: "write", Path: f.fileData.name, Err: errors.New("file handle is read only")}
 	}
 	n = len(b)
-	cur := atomic.LoadInt64(&f.at)
+	cur := int(atomic.LoadInt64(&f.at))
+
 	f.fileData.Lock()
 	defer f.fileData.Unlock()
-	diff := cur - int64(len(f.fileData.data))
+	diff := cur - len(f.fileData.data)
+
 	var tail []byte
-	if n+int(cur) < len(f.fileData.data) {
-		tail = f.fileData.data[n+int(cur):]
+	if n+cur < len(f.fileData.data) {
+		tail = f.fileData.data[n+cur:]
 	}
 	if diff > 0 {
-		f.fileData.data = append(bytes.Repeat([]byte{00}, int(diff)), b...)
+		f.fileData.data = append(bytes.Repeat([]byte{00}, diff), b...)
 		f.fileData.data = append(f.fileData.data, tail...)
 	} else {
 		f.fileData.data = append(f.fileData.data[:cur], b...)
@@ -254,13 +255,16 @@ func (f *File) Write(b []byte) (n int, err error) {
 	}
 	setModTime(f.fileData, time.Now())
 
-	atomic.StoreInt64(&f.at, int64(len(f.fileData.data)))
+	atomic.StoreInt64(&f.at, int64(cur+n))
 	return
 }
 
 func (f *File) WriteAt(b []byte, off int64) (n int, err error) {
+	cur := atomic.LoadInt64(&f.at)
 	atomic.StoreInt64(&f.at, off)
-	return f.Write(b)
+	n, err = f.Write(b)
+	atomic.StoreInt64(&f.at, cur)
+	return n, err
 }
 
 func (f *File) WriteString(s string) (ret int, err error) {
@@ -282,22 +286,27 @@ func (s *FileInfo) Name() string {
 	s.Unlock()
 	return name
 }
+
 func (s *FileInfo) Mode() os.FileMode {
 	s.Lock()
 	defer s.Unlock()
 	return s.mode
 }
+
 func (s *FileInfo) ModTime() time.Time {
 	s.Lock()
 	defer s.Unlock()
 	return s.modtime
 }
+
 func (s *FileInfo) IsDir() bool {
 	s.Lock()
 	defer s.Unlock()
-	return s.dir
+	return s.mode&os.ModeDir != 0
 }
+
 func (s *FileInfo) Sys() interface{} { return nil }
+
 func (s *FileInfo) Size() int64 {
 	if s.IsDir() {
 		return int64(42)
