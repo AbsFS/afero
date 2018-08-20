@@ -2,20 +2,16 @@ sudo: false
 language: go
 
 go:
-  - 1.9
-  - "1.10"
-  - tip
+- 1.9.x
+- 1.10.x
+- 1.x
 
 os:
   - linux
-  - osx
 
 matrix:
-  allow_failures:
-    - go: tip
   fast_finish: true
 
 script:
   - go build
   - go test -race -v ./...
-
