@@ -14,14 +14,13 @@
 package afero
 
 import (
+	"context"
 	"log"
 	"os"
 	"time"
 
 	"cloud.google.com/go/storage"
-	"github.com/zatte/afero/gcs"
-
-	"golang.org/x/net/context"
+	"github.com/absfs/afero/gcs"
 )
 
 func NewGcsFs(ctx context.Context, cl *storage.Client, bucket string, folderSep string) Fs {

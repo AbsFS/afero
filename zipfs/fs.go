@@ -7,7 +7,7 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/gofunky/afero"
+	"github.com/absfs/afero"
 )
 
 type Fs struct {

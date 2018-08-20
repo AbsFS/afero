@@ -15,6 +15,7 @@ package afero
 
 import (
 	"fmt"
+	"io"
 	"log"
 	"os"
 	"path/filepath"

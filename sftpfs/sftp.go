@@ -19,7 +19,6 @@ import (
 
 	"github.com/absfs/afero"
 	"github.com/pkg/sftp"
-	"github.com/spf13/afero"
 )
 
 // Fs is a afero.Fs implementation that uses functions provided by the sftp package.
