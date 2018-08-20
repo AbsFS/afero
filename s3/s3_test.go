@@ -6,9 +6,9 @@ import (
 	"os"
 	"testing"
 
+	"github.com/absfs/afero/test"
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/s3"
-	"github.com/spf13/afero/test"
 )
 
 var s3bucket string
