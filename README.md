@@ -4,6 +4,8 @@ This is a fork of [spf13/afero](https://github.com/spf13/afero). Please refer to
 
 A FileSystem Abstraction System for Go
 
+[![Build Status](https://travis-ci.org/absfs/afero.svg?branch=master)](https://travis-ci.org/absfs/afero)
+
 # Overview
 
 Afero is an filesystem framework providing a simple, uniform and universal API
