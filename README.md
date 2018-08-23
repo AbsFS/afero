@@ -406,39 +406,6 @@ object of a particular type".
 It's also nice that unlike some of my other libraries (hugo, cobra, viper) it
 Googles very well.
 
-## Release Notes
-
-* **0.10.0** 2015.12.10
-  * Full compatibility with Windows
-  * Introduction of afero utilities
-  * Test suite rewritten to work cross platform
-  * Normalize paths for MemMapFs
-  * Adding Sync to the file interface
-  * **Breaking Change** Walk and ReadDir have changed parameter order
-  * Moving types used by MemMapFs to a subpackage
-  * General bugfixes and improvements
-* **0.9.0** 2015.11.05
-  * New Walk function similar to filepath.Walk
-  * MemMapFs.OpenFile handles O_CREATE, O_APPEND, O_TRUNC
-  * MemMapFs.Remove now really deletes the file
-  * InMemoryFile.Readdir and Readdirnames work correctly
-  * InMemoryFile functions lock it for concurrent access
-  * Test suite improvements
-* **0.8.0** 2014.10.28
-  * First public version
-  * Interfaces feel ready for people to build using
-  * Interfaces satisfy all known uses
-  * MemMapFs passes the majority of the OS test suite
-  * OsFs passes the majority of the OS test suite
-
-## Contributing
-
-1. Fork it
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create new Pull Request
-
 ## Contributors
 
 Names in no particular order:

@@ -15,6 +15,7 @@ package afero
 
 import (
 	"fmt"
+	"io"
 	"log"
 	"os"
 	"path/filepath"
@@ -228,7 +229,7 @@ func (m *MemMapFs) OpenFile(name string, flag int, perm os.FileMode) (File, erro
 		file = mem.NewReadOnlyFileHandle(file.(*mem.File).Data())
 	}
 	if flag&os.O_APPEND > 0 {
-		_, err = file.Seek(0, os.SEEK_END)
+		_, err = file.Seek(0, io.SeekEnd)
 		if err != nil {
 			file.Close()
 			return nil, err
@@ -274,7 +275,7 @@ func (m *MemMapFs) RemoveAll(path string) error {
 	m.mu.RLock()
 	defer m.mu.RUnlock()
 
-	for p, _ := range m.getData() {
+	for p := range m.getData() {
 		if strings.HasPrefix(p, path) {
 			m.mu.RUnlock()
 			m.mu.Lock()
