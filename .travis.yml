@@ -1,5 +1,9 @@
 sudo: false
+
 language: go
+
+notifications:
+  email: false
 
 go:
   - 1.9
@@ -18,4 +22,3 @@ matrix:
 script:
   - go build
   - go test -race -v ./...
-
