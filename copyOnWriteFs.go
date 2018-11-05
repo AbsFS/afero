@@ -22,7 +22,7 @@ type CopyOnWriteFs struct {
 	layer Fs
 }
 
-func NewCopyOnWriteFs(base Fs, layer Fs) Fs {
+func NewCopyOnWriteFs(base Fs, layer Fs) *CopyOnWriteFs {
 	return &CopyOnWriteFs{base: base, layer: layer}
 }
 

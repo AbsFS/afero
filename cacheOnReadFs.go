@@ -25,7 +25,7 @@ type CacheOnReadFs struct {
 	cacheTime time.Duration
 }
 
-func NewCacheOnReadFs(base Fs, layer Fs, cacheTime time.Duration) Fs {
+func NewCacheOnReadFs(base Fs, layer Fs, cacheTime time.Duration) *CacheOnReadFs {
 	return &CacheOnReadFs{base: base, layer: layer, cacheTime: cacheTime}
 }
 
