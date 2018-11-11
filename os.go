@@ -27,7 +27,7 @@ var _ Lstater = (*OsFs)(nil)
 // (http://golang.org/pkg/os/).
 type OsFs struct{}
 
-func NewOsFs() Fs {
+func NewOsFs() *OsFs {
 	return &OsFs{}
 }
 

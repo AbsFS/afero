@@ -12,7 +12,7 @@ type ReadOnlyFs struct {
 	source Fs
 }
 
-func NewReadOnlyFs(source Fs) Fs {
+func NewReadOnlyFs(source Fs) *ReadOnlyFs {
 	return &ReadOnlyFs{source: source}
 }
 

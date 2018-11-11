@@ -33,7 +33,7 @@ func (f *BasePathFile) Name() string {
 	return strings.TrimPrefix(sourcename, filepath.Clean(f.path))
 }
 
-func NewBasePathFs(source Fs, path string) Fs {
+func NewBasePathFs(source Fs, path string) *BasePathFs {
 	return &BasePathFs{source: source, path: path}
 }
 

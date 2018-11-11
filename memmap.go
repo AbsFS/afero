@@ -31,7 +31,7 @@ type MemMapFs struct {
 	init sync.Once
 }
 
-func NewMemMapFs() Fs {
+func NewMemMapFs() *MemMapFs {
 	return &MemMapFs{}
 }
 

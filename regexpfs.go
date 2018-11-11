@@ -16,7 +16,7 @@ type RegexpFs struct {
 	source Fs
 }
 
-func NewRegexpFs(source Fs, re *regexp.Regexp) Fs {
+func NewRegexpFs(source Fs, re *regexp.Regexp) *RegexpFs {
 	return &RegexpFs{source: source, re: re}
 }
 
