@@ -105,4 +105,5 @@ var (
 	ErrFileNotFound      = os.ErrNotExist
 	ErrFileExists        = os.ErrExist
 	ErrDestinationExists = os.ErrExist
+	ErrNotImplemented    = errors.New("not implemented")
 )
