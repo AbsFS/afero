@@ -88,6 +88,9 @@ type Fs interface {
 	// happens.
 	Stat(name string) (os.FileInfo, error)
 
+	// Symlink creates newname as a symbolic link to oldname. If there is an error, it will be of type *LinkError.
+	Symlink(oldname, newname string) error
+
 	// The name of this FileSystem
 	Name() string
 

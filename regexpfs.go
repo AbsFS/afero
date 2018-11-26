@@ -144,6 +144,16 @@ func (r *RegexpFs) Create(name string) (File, error) {
 	return r.source.Create(name)
 }
 
+func (r *RegexpFs) Symlink(oldname, newname string) error {
+	if err := r.matchesName(oldname); err != nil {
+		return err
+	}
+	if err := r.matchesName(newname); err != nil {
+		return err
+	}
+	return r.source.Symlink(oldname, newname)
+}
+
 func (f *RegexpFile) Close() error {
 	return f.f.Close()
 }

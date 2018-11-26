@@ -87,6 +87,10 @@ func (OsFs) Stat(name string) (os.FileInfo, error) {
 	return os.Stat(name)
 }
 
+func (OsFs) Symlink(oldname, newname string) error {
+	return os.Symlink(oldname, newname)
+}
+
 func (OsFs) Chmod(name string, mode os.FileMode) error {
 	return os.Chmod(name, mode)
 }

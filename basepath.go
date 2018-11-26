@@ -177,4 +177,8 @@ func (b *BasePathFs) LstatIfPossible(name string) (os.FileInfo, bool, error) {
 	return fi, false, err
 }
 
+func (b *BasePathFs) Symlink(oldname, newname string) error {
+	return ErrNotImplemented // FIXME implement
+}
+
 // vim: ts=4 sw=4 noexpandtab nolist syn=go

@@ -78,3 +78,7 @@ func (r *ReadOnlyFs) MkdirAll(n string, p os.FileMode) error {
 func (r *ReadOnlyFs) Create(n string) (File, error) {
 	return nil, syscall.EPERM
 }
+
+func (r *ReadOnlyFs) Symlink(oldname, newname string) error {
+	return syscall.EPERM
+}

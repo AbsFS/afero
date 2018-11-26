@@ -288,3 +288,7 @@ func (u *CacheOnReadFs) Create(name string) (File, error) {
 	}
 	return &UnionFile{Base: bfh, Layer: lfh}, nil
 }
+
+func (u *CacheOnReadFs) Symlink(oldname, newname string) error {
+	return u.base.Symlink(oldname, newname)
+}

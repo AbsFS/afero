@@ -363,6 +363,10 @@ func (m *MemMapFs) List() {
 	}
 }
 
+func (m *MemMapFs) Symlink(oldname, newname string) error {
+	return ErrNotImplemented // FIXME implement
+}
+
 // func debugMemMapList(fs Fs) {
 // 	if x, ok := fs.(*MemMapFs); ok {
 // 		x.List()
