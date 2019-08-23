@@ -483,7 +483,8 @@ func TestUnionFileReaddirAskForTooMany(t *testing.T) {
 
 	ufs := &CopyOnWriteFs{base: base, layer: overlay}
 
-	f, err := ufs.Open("")
+	// To match `os` package empty string should fail with a not exists
+	f, err := ufs.Open(".")
 	if err != nil {
 		t.Fatal(err)
 	}
